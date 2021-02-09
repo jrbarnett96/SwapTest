@@ -40,7 +40,7 @@ The swap test was originally concieved by Watrous et al. in a paper exploring ho
 
 Our ancilla is |0>, our states are |> and |>. Conveniently enough, this works even if |> and |> consist of more than one qubit each. We apply the following circuit:
 
-<img src="assets/images/swap_test.png" width="300" />
+<img src="assets/images/swap_circuit.png" width="300" />
 
 In words, we apply the Hadamard gate to our ancilla, controlled-swap our initial qubit and target qubit, apply the Hadamard to the ancilla again, and finish by measuring the ancilla. 
 
