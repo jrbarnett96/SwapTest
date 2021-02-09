@@ -1,27 +1,34 @@
 # SwapTest
 
+Outline 
+
+- Overview
+-- What it is 
+-- What it does
+-- What's in the repo
+- Installation
+-- Use conda to create environment
+- Background
+-- Distinguishing quantum states
+-- Creating an arbitrary quantum state on a quantum computer
+-- 
+-- 
+--
+
+
 ## Overview
 
-This repository contains an implementation of the quantum swap test, used to distinguish two quantum states. This test is then applied in two cases:
+This repo contains a Jupyter notebook which implements the swap test on a simulated quantum computer. After reviewing the basics of state generation on a quantum computer, we use the swap test to not only distinguish our input state with another quantum state, but estimate the inner product in order to transform our input state into the target state. We do this for the case of an arbitrary single-qubit state, and extend it to a multi-qubit case in which each state takes the form of a bitstring (i.e. |01001>, |000>, etc.). 
 
-Given a randomly generated single qubit state with unknown parameters, the test is used to learn the parameters of a rotation that can replicate the state. 
+This notebook provides basic plots and animations to showcase this circuit in action as well as its convergence properties. I've provided a conda environment file to take care of the dependencies.
 
-Using only the distinguishing property of the swap test, we reconstruct a product state in which each qubit is in the state |0> or |1>.
+## Installation
 
-I've included a Jupyter notebook for running this code and viewing benchmarks, as well as a conda environment file.
-
-## Requirements
-
-> Qiskit
-> Scipy
-> Numpy
-> Matplotlib
-
-I've provided a makefile and a conda environment file to use.
+You'll need conda to create the provided environment. Assuming you have that installed, use [insert code here] on environment.yaml to create the environment, then go into Jupyter to launch the notebook. I provide more details on the implementation there. 
 
 ## Background
 
-There'll be plenty of exposition in the notebook, but I figured I would use this space to go into more detail regarding the theory. What's the theory? *waves hands around* just about everything I feel is necessary to understand what's happening in the notebook, including details I ran into while reading into the problem. 
+There'll be plenty of exposition in the notebook, but I figured I would use this space to go into more detail regarding the theory. What's the relevant theory? *waves hands* just about everything I feel is necessary to understand what's happening in the notebook, including details I ran into while reading into the problem. 
 
 ### Creating an arbitrary quantum state
 
@@ -51,7 +58,7 @@ A single run of the circuit takes in three qubits: an ancilla qubit |0>, and the
 
 ### More but simpler: approximating product states
 
-## Possible extensions
+## Further improvements
 
 1. 
 2. 
