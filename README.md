@@ -51,7 +51,7 @@ If you work through the algebra, you'll find that the state before measurement c
 
 Now we're posed a problem. Say we're given a state, any state. It's only one qubit, but it's in some random superposition. Also, assume we have a lot of copies of this state. We want to replicate this state in a qubit of our own. To do so we 
 
-
+<img src="assets/images/swap_circuit_multi.png", width="300" />
 
 ### More but simpler: approximating product states
 
