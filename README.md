@@ -38,9 +38,9 @@ One final note before we continue. The above gate is not necessarily the one imp
 
 The swap test was originally concieved by Watrous et al. in a paper exploring how to effectively distinguish quantum states. In their paper they were concerned with two parties with secret keys in the form of quantum states. They need to determine if their keys are the same, so they send copies of them to an arbiter. This arbiter then performs the swap test, then informing the two parties of the result. 
 
-Given two states and an ancilla qubit that starts in |0>, we apply the following circuit:
+Our ancilla is |0>, our states are |> and |>. Conveniently enough, this works even if |> and |> consist of more than one qubit each. We apply the following circuit:
 
-(INSERT CIRCUIT HERE)
+<img src="assets/images/swap_test.png" width="300" />
 
 In words, we apply the Hadamard gate to our ancilla, controlled-swap our initial qubit and target qubit, apply the Hadamard to the ancilla again, and finish by measuring the ancilla. 
 
@@ -50,6 +50,8 @@ If you work through the algebra, you'll find that the state before measurement c
 ### Approximating a 
 
 Now we're posed a problem. Say we're given a state, any state. It's only one qubit, but it's in some random superposition. Also, assume we have a lot of copies of this state. We want to replicate this state in a qubit of our own. To do so we 
+
+
 
 ### More but simpler: approximating product states
 
