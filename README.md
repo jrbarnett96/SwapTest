@@ -12,45 +12,52 @@ You'll need conda to create the provided environment. Assuming you have that ins
 
 ## Background
 
-I'm not going to replicate a quantum information course in a readme, but I figured I would use this space to go into more detail regarding the theory surrounding the swap test and my implementation. What's the relevant theory? *waves hands* just about everything I feel is necessary to understand what's happening in the notebook, including details I ran into while reading into the problem. 
+I run the risk of getting too deep into the weeds here, but I'll attempt to go through all the background necessary to understand what's going on in the swap test circuit, and my code. I'm assuming a baseline knowledge of quantum computing (i.e. what a qubit is, what a quantum circuit is, measurement, etc.) as well as some linear algebra. I'll include references at the end for further reading.
 
 ### Creating an arbitrary quantum state
 
-We start with the ways in which you can write a qubit. There are a few. 
+We start with the ways in which you can represent a qubit. There are a few. 
 
-Suppose you have a single qubit, described by a superposition of the basis states |0> and |1>:
+Enter a qubit's Hilbert space, specify a basis, call it the computational basis to satisfy the jury. Suppose you have a qubit in this space. It can be a superposition of the basis states: a|0> + b|1>. The weights of this superposition are complex numbers which satisfy the normalization condition |a|<sup>2<\sup> + |b|<sup>2<\sup> = 1. The modulus squared |x|<sup>2<\sup> of these weights represent the probability of observing the corresponding states in a measurement. Standard fare so far. 
 
-![superposition](/assets/images/statevector_amp.png)
+With some algebra, however, this superposition can be restated as cos(0/2)|0> + e<sup>(iφ)<\sup>sin(0/2)|1>, where 0 <= 0 <= π and 0 <= φ <= 2π if you want to restrict yourself to unique states (φ = 0 and φ = 2π result in the same state, but let's, uh, let's ignore that). These angles are known as Bloch angles. Any state can be multiplied by a global phase factor e<sup>iγ<\sup> without affecting measurement probabilities, so for our purposes we can ignore this phase. 
 
-The weights of this superposition are complex numbers which satisfy the normalization condition |a|^2 + |b|^2 = 1. 
+If you can parameterize the qubit with two angles, it isn't a big leap to visualize the state vector as lying on a sphere, the Bloch sphere. The states we truck with are restricted to the surface of this sphere (mixed states, those in a statistical ensemble, lie within the sphere, but we don't worry about those). We can then transform our polar coordinate representation into spherical coordinates, receiving the Bloch vector (INSERT BLOCH VECTOR FORM HERE). 
 
-On the other hand, these numbers can be reframed as (cos(theta/2), e^(iphi)sin(theta/2)), where (thetaRange) and (phiRange) if you want unique states (permuting by 2pi just gives the same state anyway)
+(INSERT BLOCH SPHERE IMAGE)
 
-(How is this derived?)
+The usage of Bloch angles to describe our states becomes significant when we consider unitary transformations. Unitary transformations can be seen as rotating states around the Bloch sphere with respect to some axis. An arbitrary unitary can be decomposed in any number of ways, but the one that will be most useful is this one:
 
-Once you've opened your mind to specifiying the quantum state to two angles, you can start to visualize the states as lying on a sphere, the Bloch sphere. We'll be using this sphere to represent our quantum states and visualize their differences.
+(INSERT MATRIX FOR TRANSFORM)
 
-Finally, you can transform these angles into spherical coordinates (x, y, z) on this sphere. This isn't going to be very useful in this project.
+If we have a qubit in the state |0>, applying this transformation to the qubit will transform it into cos(0/2)|0> + e<sup>(iφ)<\sup>sin(0/2)|1>, so this unitary is capable of getting us anywhere on the Bloch sphere. So for our purposes, we have a way of initializing our quantum state to any state we choose; all we have to do is specify 0 and φ
 
----
-
-
-
-
+One final note before we continue. The above gate is not necessarily the one implemented on whatever physical quantum computer you use. Quantum computers have fundamental gate sets, a set of primitives that every gate in your program is transpiled to. While Qiskit presents this gate in code, they have their own technique for initializing quantum states, given in [reference] (in their own words, they start with the target state and work backwards to |0>, inverting the transformation).
 
 ### Distinguishing quantum states
 
-Without the ability to compute the inner product directly, we have to ask ourselves how we can decide whether two states are the same. As it turns out, there's a roundabout way of getting this answer with a quantum circuit. That circuit is the Swap Test [1], shown in the following figure. 
+The swap test was originally concieved by Watrous et al. in a paper exploring how to effectively distinguish quantum states. In their paper they were concerned with two parties with secret keys in the form of quantum states. They need to determine if their keys are the same, so they send copies of them to an arbiter. This arbiter then performs the swap test, then informing the two parties of the result. 
 
-A single run of the circuit takes in three qubits: an ancilla qubit |0>, and the two quantum states we want to distinguish. 
+Given two states and an ancilla qubit that starts in |0>, we apply the following circuit:
+
+(INSERT CIRCUIT HERE)
+
+In words, we apply the Hadamard gate to our ancilla, controlled-swap our initial qubit and target qubit, apply the Hadamard to the ancilla again, and finish by measuring the ancilla. 
+
+If you work through the algebra, you'll find that the state before measurement comes out to be (INSERT STATE HERE). We can then compute the probability of 
+
 
 ### Approximating a 
+
+Now we're posed a problem. Say we're given a state, any state. It's only one qubit, but it's in some random superposition. Also, assume we have a lot of copies of this state. We want to replicate this state in a qubit of our own. To do so we 
 
 ### More but simpler: approximating product states
 
 ## Further improvements
 
-1. 
+If you look at the notebook, you'll see that I accomplished the basic goals of this task.
+
+1. Alternative methods of searching parameter space for the optimum
 2. 
 3.
 
