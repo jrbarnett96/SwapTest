@@ -28,8 +28,7 @@ If you can parameterize the qubit with two angles, it isn't a big leap to visual
 
 The usage of Bloch angles to describe our states becomes useful when when considering unitary transformations of these states. Unitary transformations can be seen as rotating states around the Bloch sphere with respect to some axis. An arbitrary unitary can be decomposed in any number of ways, but the one that will be most useful is this one:
 
-<img src="assets\images\u_gate.png" alt="alt"
- title="title" width="150" height="300" /img>
+<img src="assets/images/u_gate.png" alt="alt" align="center" title="title" width="300" />
 
 If we have a qubit in the state |0>, applying this transformation to the qubit will transform it into cos(θ/2)|0> + e<sup>(iφ)<\sup>sin(θ/2)|1>, so this unitary is capable of getting us anywhere on the Bloch sphere. So for our purposes, we have a way of initializing our quantum state to any state we choose; all we have to do is specify 0 and φ
 
