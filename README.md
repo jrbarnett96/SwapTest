@@ -20,7 +20,7 @@ We start with the ways in which you can write a qubit. There are a few.
 
 Suppose you have a single qubit, described by a superposition of the basis states |0> and |1>:
 
-![superposition](https://github.com/jrbarnett96/SwapTest/tree/main/assets/images/statevector_amp.png)
+![superposition](/assets/images/statevector_amp.png)
 
 The weights of this superposition are complex numbers which satisfy the normalization condition |a|^2 + |b|^2 = 1. 
 
