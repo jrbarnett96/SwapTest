@@ -20,7 +20,7 @@ We start with the ways in which you can represent a qubit. There are a few.
 
 Enter a qubit's Hilbert space, specify a basis, call it the computational basis to satisfy the jury. Suppose you have a qubit in this space. It can be a superposition of the basis states: a|0> + b|1>. The weights of this superposition are complex numbers which satisfy the normalization condition |a|<sup>2</sup> + |b|<sup>2</sup> = 1. The modulus squared |x|<sup>2</sup> of these weights represent the probability of observing the corresponding states in a measurement. Standard fare so far. 
 
-With some algebra, however, this superposition can be restated as cos(0/2)|0> + e<sup>(iφ)</sup>sin(0/2)|1>, where 0 <= 0 <= π and 0 <= φ <= 2π if you want to restrict yourself to unique states (φ = 0 and φ = 2π result in the same state, but let's, uh, let's ignore that). These angles are known as Bloch angles. Any state can be multiplied by a global phase factor e<sup>iγ</sup> without affecting measurement probabilities, so for our purposes we can ignore this phase. 
+With some algebra, however, this superposition can be restated as cos(θ/2)|0> + e<sup>(iφ)</sup>sin(θ/2)|1>, where 0 <= θ <= π and 0 <= φ <= 2π if you want to restrict yourself to unique states (φ = 0 and φ = 2π result in the same state, but let's, uh, let's ignore that). These angles are known as Bloch angles. Any state can be multiplied by a global phase factor e<sup>iγ</sup> without affecting measurement probabilities, so for our purposes we can ignore this phase. 
 
 If you can parameterize the qubit with two angles, it isn't a big leap to visualize the state vector as lying on a sphere, the Bloch sphere. The states we truck with are restricted to the surface of this sphere (mixed states, those in a statistical ensemble, lie within the sphere, but we don't worry about those). 
 
@@ -30,7 +30,7 @@ The usage of Bloch angles to describe our states becomes useful when when consid
 
 (INSERT MATRIX FOR TRANSFORM)
 
-If we have a qubit in the state |0>, applying this transformation to the qubit will transform it into cos(0/2)|0> + e<sup>(iφ)<\sup>sin(0/2)|1>, so this unitary is capable of getting us anywhere on the Bloch sphere. So for our purposes, we have a way of initializing our quantum state to any state we choose; all we have to do is specify 0 and φ
+If we have a qubit in the state |0>, applying this transformation to the qubit will transform it into cos(θ/2)|0> + e<sup>(iφ)<\sup>sin(θ/2)|1>, so this unitary is capable of getting us anywhere on the Bloch sphere. So for our purposes, we have a way of initializing our quantum state to any state we choose; all we have to do is specify 0 and φ
 
 One final note before we continue. The above gate is not necessarily the one implemented on whatever physical quantum computer you use. Quantum computers have fundamental gate sets, a set of primitives that every gate in your program is transpiled to. While Qiskit presents this gate in code, they have their own technique for initializing quantum states, given in [reference] (in their own words, they start with the target state and work backwards to |0>, inverting the transformation).
 
