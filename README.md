@@ -24,11 +24,11 @@ With some algebra, however, this superposition can be restated as cos(θ/2)|0> +
 
 If you can parameterize the qubit with two angles, it isn't a big leap to visualize the state vector as lying on a sphere, the Bloch sphere. The states we truck with are restricted to the surface of this sphere (mixed states, those in a statistical ensemble, lie within the sphere, but we don't worry about those). 
 
-(INSERT BLOCH SPHERE IMAGE)
+<img src="assets/images/bloch_sphere.png" alt="Bloch sphere" width="300" />
 
 The usage of Bloch angles to describe our states becomes useful when when considering unitary transformations of these states. The action of a unitary transformation can be interpreted as a rotation around the Bloch sphere with respect to some axis. An arbitrary unitary can be decomposed in any number of ways, about any axis going through the sphere, but the one that will be most useful for us is this one:
 
-<img src="assets/images/u_gate.png" alt="alt" title="title" width="300" />
+<img src="assets/images/u_gate.png" alt="U-gate equation" width="300" />
 
 If we have a qubit in the state |0>, applying this transformation to the qubit will transform it into cos(θ/2)|0> + e<sup>(iφ)</sup>sin(θ/2)|1>, so this unitary is capable of getting us anywhere on the Bloch sphere. So for our purposes, we have a way of initializing our quantum state to any state we choose; all we have to do is specify θ and φ.
 
@@ -44,7 +44,7 @@ For this project, we are the arbiter. We're given two qubits, possibly many copi
 
 In words, we apply the Hadamard gate to our ancilla, use the ancilla to control-swap our qubits, apply the Hadamard to the ancilla again, and finish by measuring the ancilla.  
 
-If you work through the algebra (or read through Buhrman et al.) you'll find that the total state before measurement is (1/4)(|0>(|>|> + |>|>) + |1>(|>|> - |>|>)). The measurement probability for |1> is then 1/2(1 - |<|>|<sup>2</sup>. We can conclude a few things from this result. One, if the states are identical, the inner product is 1 and you will never measure the ancilla in the |1> state. On the other hand, if the states are distinct, there will be a nonzero probability of measuring |1>. While a single application of the test has a chance of failing, applying the test to multiple copies of our states gives us a high probability of correctly distinguishing them.
+If you work through the algebra (or read through Buhrman et al.) you'll find that the total state before measurement is (1/4)(|0>(|Φ>|ψ> + |ψ>|Φ>) + |1>(|Φ>|ψ> - |ψ>|Φ>)). The measurement probability for |1> is then 1/2(1 - |<Φ|ψ>|<sup>2</sup>. We can conclude a few things from this result. One, if the states are identical, the inner product is 1 and you will never measure the ancilla in the |1> state. On the other hand, if the states are distinct, there will be a nonzero probability of measuring |1>. While a single application of the test has a chance of failing, applying the test to multiple copies of our states gives us a high probability of correctly distinguishing them.
 
 Furthermore, we can approximate the inner product with repeated applications of the swap test. If we apply the swap test N times, the inner product can be approximated as 1 - (2/N)*C, where C is the number of times the ancilla is observed in the |1> state across all applications of the test.
 
@@ -60,7 +60,7 @@ While it would be nice to use something like gradient descent to find the optima
 
 We can extend the procedure described in the last section to the multi-qubit state case as well. If each qubit is specified by Bloch angles, 
 
-<img src="assets/images/swap_circuit_multi.png", width="300" />
+<img src="assets/images/swap_circuit_multi.png" width="300" />
 
 ## Further improvements
 
