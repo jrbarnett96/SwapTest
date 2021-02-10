@@ -32,11 +32,11 @@ The usage of Bloch angles to describe our states becomes useful when when consid
 
 If we have a qubit in the state |0>, applying this transformation to the qubit will transform it into cos(θ/2)|0> + e<sup>(iφ)</sup>sin(θ/2)|1>, so this unitary is capable of getting us anywhere on the Bloch sphere. So for our purposes, we have a way of initializing our quantum state to any state we choose; all we have to do is specify θ and φ.
 
-One final note before we continue. The above gate is not necessarily the one implemented on whatever physical quantum computer you use. Quantum computers have fundamental gate sets, a set of primitive gates that every gate in your program is transpiled to. While Qiskit gives us the u-gate built in, they have their own technique for initializing quantum states, given in [reference] (in their own words, they start with the target state and transform it to |0>, using the inverse transformation for the forward rotation).
+One final note before we continue. The above gate is not necessarily the one implemented on whatever physical quantum computer you use. Quantum computers have fundamental gate sets, a set of primitive gates that every gate in your program is transpiled to. While Qiskit gives us the u-gate built in, they have their own technique for initializing quantum states, given in [1] (in their own words, they start with the target state and transform it to |0>, using the inverse transformation for the forward rotation).
 
 ### Distinguishing quantum states
 
-The swap test was originally concieved by Buhrman et al. [reference] in a paper exploring how to effectively distinguish quantum states. In their paper they were concerned with distinguishing secret keys in the case where the keys are quantum states and the parties share no entanglement. They need to determine if their keys are the same, so they send copies of them to an arbiter. This arbiter then performs the swap test to check this, and informs the two parties of the result. They go on to give bounds on the qubits required for a given desired error. 
+The swap test was originally concieved by Buhrman et al. [2] in a paper exploring how to effectively distinguish quantum states. In their paper they were concerned with distinguishing secret keys in the case where the keys are quantum states and the parties share no entanglement. They need to determine if their keys are the same, so they send copies of them to an arbiter. This arbiter then performs the swap test to check this, and informs the two parties of the result. They go on to give bounds on the qubits required for a given desired error. 
 
 For this project, we are the arbiter. We're given two qubits, possibly many copies of each, and apply the following circuit:
 
@@ -66,12 +66,13 @@ We can extend the procedure described in the last section to the multi-qubit sta
 
 If you look at the notebook, you'll see that I accomplished the basic goals of this task.
 
-1. Alternative methods of searching parameter space for the optimum
-2. Applying this technique to a real quantum computer, with considerations for error
-3. Implementing this circuit with PennyLane
+- [ ] Buhrman et al. describes a method of distinguishing states with a higher probability than the technique described in this writeup. I'd like to see if that can be implemented in a quantum circuit, using Qiskit or some other quantum simulator
+- [ ] I'd like to try running this algorithm on an actual quantum computer if possible, with considerations for error correction and the role it would play in successfully approximating the target state
+- [ ] While multiple optimization techniques were used to approximate the quantum states in the notebook, I only used a handful from Scipy. I'm sure others exist, and even the ones I used could perhaps be tuned to provide better convergence properties. 
 
 ## References
 
-[1] 
-[2] 
-[3]
+[1] V. Shende, S. Bullock, I. Markov. Synthesis of Quantum Logic Circuits. In *IEEE Trans. on Computer-Aided Design, vol. 25, no. 6, June 2006, pp.1000 - 1010*. quant-ph/0406176.
+[2] H. Buhrman, R. Cleve, J. Watrous, R. de Wolf. Quantum Fingerprinting. In *Physical Review Letters, vol. 87, iss. 16, September 2001*. quant-ph/0102001. 
+[3] M. Nielsen, I. Chuang. Quantum Computation and Information. Cambridge University Press, 2000.
+[4] https://en.wikipedia.org/wiki/Swap_test
