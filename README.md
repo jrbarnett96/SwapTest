@@ -73,6 +73,9 @@ If you look at the notebook, you'll see that I accomplished the basic goals of t
 ## References
 
 [1] V. Shende, S. Bullock, I. Markov. Synthesis of Quantum Logic Circuits. In *IEEE Trans. on Computer-Aided Design, vol. 25, no. 6, June 2006, pp.1000 - 1010*. quant-ph/0406176.
+
 [2] H. Buhrman, R. Cleve, J. Watrous, R. de Wolf. Quantum Fingerprinting. In *Physical Review Letters, vol. 87, iss. 16, September 2001*. quant-ph/0102001. 
+
 [3] M. Nielsen, I. Chuang. Quantum Computation and Information. Cambridge University Press, 2000.
+
 [4] https://en.wikipedia.org/wiki/Swap_test
