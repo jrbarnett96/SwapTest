@@ -38,15 +38,15 @@ One final note before we continue. The above gate is not necessarily the one imp
 
 The swap test was originally concieved by Buhrman et al. [2] in a paper exploring how to effectively distinguish quantum states. In their paper they were concerned with distinguishing secret keys in the case where the keys are quantum states and the parties share no entanglement. They need to determine if their keys are the same, so they send copies of them to an arbiter. This arbiter then performs the swap test to check this, and informs the two parties of the result. They go on to give bounds on the qubits required for a given desired error. 
 
-For this project, we are the arbiter. We're given two qubits, possibly many copies of each, and apply the following circuit:
+For this project, we are the arbiter. We're given two states |ψ> and |Φ>, possibly many copies of each, and apply the following circuit:
 
 <img src="assets/images/swap_circuit.png" width="300" />
 
 In words, we apply the Hadamard gate to our ancilla, use the ancilla to control-swap our qubits, apply the Hadamard to the ancilla again, and finish by measuring the ancilla.  
 
-If you work through the algebra (or read through Buhrman et al.) you'll find that the total state before measurement is (1/4)(|0>(|Φ>|ψ> + |ψ>|Φ>) + |1>(|Φ>|ψ> - |ψ>|Φ>)). The measurement probability for |1> is then 1/2(1 - |<Φ|ψ>|<sup>2</sup>. We can conclude a few things from this result. One, if the states are identical, the inner product is 1 and you will never measure the ancilla in the |1> state. On the other hand, if the states are distinct, there will be a nonzero probability of measuring |1>. While a single application of the test has a chance of failing, applying the test to multiple copies of our states gives us a high probability of correctly distinguishing them.
+If you work through the algebra (or read through Buhrman et al.) you'll find that the total state before measurement is (1/4)(|0>(|Φ>|ψ> + |ψ>|Φ>) + |1>(|Φ>|ψ> - |ψ>|Φ>)). The measurement probability for |1> is then 1/2(1 - |<Φ|ψ>|<sup>2</sup>). We can conclude a few things from this result. One, if the states are identical, the inner product is 1 and you will never measure the ancilla in the |1> state. On the other hand, if the states are distinct, there will be a nonzero probability of measuring |1>. While a single application of the test has a chance of failing, applying the test to multiple copies of our states gives us a high probability of correctly distinguishing them.
 
-Furthermore, we can approximate the inner product with repeated applications of the swap test. If we apply the swap test N times, the inner product can be approximated as 1 - (2/N)*C, where C is the number of times the ancilla is observed in the |1> state across all applications of the test.
+Furthermore, we can approximate the inner product with repeated applications of the swap test. If we apply the swap test N times, the inner product can be approximated as 1 - 2C/N, where C is the number of times the ancilla is observed in the |1> state across all applications of the test.
 
 ### Approximating a single-qubit state
 
@@ -58,13 +58,17 @@ While it would be nice to use something like gradient descent to find the optima
 
 ### More qubits, but simpler: approximating a product
 
-We can extend the procedure described in the last section to the multi-qubit state case as well. If each qubit is specified by Bloch angles, 
+We can extend the procedure described in the last section to the multi-qubit state case as well. If each state is a product state where each qubit is either |0> or |1>, we can construct an extended swap test circuit, displayed below:
 
 <img src="assets/images/swap_circuit_multi.png" width="300" />
 
+This circuit performs the same as the single-qubit circuit, swapping the appropriate qubits in each state. Since the states are so simple, we won't need to introduce Bloch angles for each qubit. Instead, we iteratively change the identity of the qubits of our initial state. Say we start with |000>, and our target is |101> (but we don't know that). We apply the swap test to these two states multiple times; if we measure a 1 even once, we know the states aren't the same. So we modify our initial state, permuting the qubits (|001>, |010>, etc.) until our swap test returns |0> for all measurements. This isn't a foolproof technique, since there's a finite probability that our states are distinct but we measured |0> each time. While this is possible, the probability of this occurring is so low for repeated runs of the swap test that we can be fairly certain that we have the right state.
+
+This problem is pretty similar to the problem approached by Buhrman et al. In their paper they construct a set of states that can be distinguished using the swap test, but with a known probability of misidentification. While an appropriate choice of states used for keys could put a bound on the misidentification error rate, repeated applications of the swap test was also explored in the case where the two parties possess multiple copies of their keys. 
+
 ## Further improvements
 
-If you look at the notebook, you'll see that I accomplished the basic goals of this task.
+In the notebook I provide a basic implementation of solutions to the problems I described above, but there's a lot that can be done to improve/extend it. In the future I'd like to do the following:
 
 - [ ] Buhrman et al. describes a method of distinguishing states with a higher probability than the technique described in this writeup. I'd like to see if that can be implemented in a quantum circuit, using Qiskit or some other quantum simulator
 - [ ] I'd like to try running this algorithm on an actual quantum computer if possible, with considerations for error correction and the role it would play in successfully approximating the target state
