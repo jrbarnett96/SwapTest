@@ -2,9 +2,9 @@
 
 ## Overview
 
-This repo contains a Jupyter notebook which implements the swap test on a simulated quantum computer using Qiskit. After reviewing the basics of state generation on a quantum computer, we use the swap test to not only distinguish our input state with another quantum state, but estimate the inner product in order to transform our input state into the target state. We do this for the case of an arbitrary single-qubit state, and extend it to a multi-qubit case in which each state takes the form of a bitstring (i.e. |01001>, |000>, etc.). 
+This repo contains a Jupyter notebook which implements the swap test on a simulated quantum computer using Qiskit. After reviewing the basics of state generation on a quantum computer, we use the swap test to distinguish our initial state with randomly generated quantum state, estimating their inner product to iteratively transform our input state into the target state. We do this for single-qubit states, and extend it to a multi-qubit case in which each state takes the form of a bitstring (i.e. |01001>, |000>, etc.). 
 
-This notebook provides basic plots and animations to showcase this circuit in action as well as its convergence properties. I've provided a conda environment file to take care of the dependencies.
+This notebook provides basic plots and animations to showcase this circuit in action as well as its convergence properties (how many iterations it takes to either approximate the inner product or just distinguish the two states). I've provided a conda environment file to take care of the dependencies.
 
 ## Installation
 
